@@ -169,13 +169,21 @@ NSString * const NXOAuth2ClientConnectionContextTokenRefresh = @"tokenRefresh";
 	}
 }
 
-- (NSURL *)authorizationURLWithRedirectURL:(NSURL *)redirectURL;
+- (NSURL *)authorizationURLWithRedirectURL:(NSURL *)redirectURL parameters:(NSDictionary*)configuredParameters;
 {
-	return [authorizeURL nxoauth2_URLByAddingParameters:[NSDictionary dictionaryWithObjectsAndKeys:
-														 @"code", @"response_type",
-														 clientId, @"client_id",
-														 [redirectURL absoluteString], @"redirect_uri",
-														 nil]];
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       @"code", @"response_type",
+                                       clientId, @"client_id",
+                                       [redirectURL absoluteString], @"redirect_uri",
+                                       nil];
+    
+    if (configuredParameters) {
+        for (id key in [configuredParameters allKeys]) {
+            [parameters setValue:[configuredParameters objectForKey:key] forKey:key];
+        }
+    }
+    
+	return [authorizeURL nxoauth2_URLByAddingParameters:parameters];
 }
 
 

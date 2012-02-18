@@ -38,6 +38,7 @@ NSString * const kNXOAuth2AccountStoreConfigurationSecret = @"kNXOAuth2AccountSt
 NSString * const kNXOAuth2AccountStoreConfigurationAuthorizeURL = @"kNXOAuth2AccountStoreConfigurationAuthorizeURL";
 NSString * const kNXOAuth2AccountStoreConfigurationTokenURL = @"kNXOAuth2AccountStoreConfigurationTokenURL";
 NSString * const kNXOAuth2AccountStoreConfigurationRedirectURL = @"kNXOAuth2AccountStoreConfigurationRedirectURL";
+NSString * const kNXOAuth2AccountStoreConfigurationParameters = @"kNXOAuth2AccountStoreConfigurationParameters";
 
 #pragma mark Account Type
 
@@ -188,8 +189,9 @@ NSString * const kNXOAuth2AccountStoreAccountType = @"kNXOAuth2AccountStoreAccou
         configuration = [self.configurations objectForKey:accountType];
     }
     
+    NSDictionary *parameters = [configuration objectForKey:kNXOAuth2AccountStoreConfigurationParameters];
     NSURL *redirectURL = [configuration objectForKey:kNXOAuth2AccountStoreConfigurationRedirectURL];
-    NSURL *preparedURL = [client authorizationURLWithRedirectURL:redirectURL];
+    NSURL *preparedURL = [client authorizationURLWithRedirectURL:redirectURL parameters:parameters];
     
     aPreparedAuthorizationURLHandler(preparedURL);
 }
@@ -388,8 +390,9 @@ NSString * const kNXOAuth2AccountStoreAccountType = @"kNXOAuth2AccountStoreAccou
         configuration = [self.configurations objectForKey:accountType];
     }
     
+    NSDictionary *parameters = [configuration objectForKey:kNXOAuth2AccountStoreConfigurationParameters];
     NSURL *redirectURL = [configuration objectForKey:kNXOAuth2AccountStoreConfigurationRedirectURL];
-    NSURL *preparedURL = [client authorizationURLWithRedirectURL:redirectURL];
+    NSURL *preparedURL = [client authorizationURLWithRedirectURL:redirectURL parameters:parameters];
     
 #if TARGET_OS_IPHONE
         [[UIApplication sharedApplication] openURL:preparedURL];

@@ -30,6 +30,7 @@ extern NSString * const kNXOAuth2AccountStoreConfigurationSecret;
 extern NSString * const kNXOAuth2AccountStoreConfigurationAuthorizeURL;
 extern NSString * const kNXOAuth2AccountStoreConfigurationTokenURL;
 extern NSString * const kNXOAuth2AccountStoreConfigurationRedirectURL;
+extern NSString * const kNXOAuth2AccountStoreConfigurationParameters;
 
 
 #pragma mark Account Type

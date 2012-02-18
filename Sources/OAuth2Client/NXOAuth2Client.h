@@ -98,7 +98,7 @@ extern NSString * const NXOAuth2ClientConnectionContextTokenRefresh;
  * Authenticate usind a web URL (Web Server Flow)
  * returns the URL to be opened to get access grant
  */
-- (NSURL *)authorizationURLWithRedirectURL:(NSURL *)redirectURL;
+- (NSURL *)authorizationURLWithRedirectURL:(NSURL *)redirectURL parameters:(NSDictionary*)parameters;
 
 /*!
  * Authenticate with username & password (User Credentials Flow)
