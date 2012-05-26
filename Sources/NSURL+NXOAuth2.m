@@ -50,7 +50,11 @@
 - (NSString *)nxoauth2_URLStringWithoutQueryString;
 {
     NSArray *parts = [[self absoluteString] componentsSeparatedByString:@"?"];
-    return [parts objectAtIndex:0];
+    NSString* result = [parts objectAtIndex:0];
+    if ([result hasSuffix:@"/"]) {
+        result = [result substringToIndex:result.length - 1];
+    }
+    return result;
 }
 
 @end

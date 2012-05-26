@@ -467,6 +467,13 @@ sendingProgressHandler:(NXOAuth2ConnectionSendingProgressHandler)aSendingProgres
 				client.accessToken = nil;
 			}
 		}
+
+#if (NXOAuth2ConnectionDebug)
+        NSString* responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"Authorization failed with URL: %@, headers: %@, response: %@", self.response.URL, 
+              [(NSHTTPURLResponse*)response allHeaderFields], responseData); 
+        [responseData release];
+#endif
 		
 		NSString *localizedError = [NSString stringWithFormat:NSLocalizedString(@"HTTP Error: %d", @"NXOAuth2HTTPErrorDomain description"), self.statusCode];
 		NSDictionary *errorUserInfo = [NSDictionary dictionaryWithObject:localizedError forKey:NSLocalizedDescriptionKey];
